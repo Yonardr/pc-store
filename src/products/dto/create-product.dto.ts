@@ -5,6 +5,6 @@ export class CreateProductDto{
     readonly name: string;
     @ApiProperty({example: '2', description: 'Номер типа товара'})
     readonly type_id: number;
-    @ApiProperty({example: '1', description: 'Номер описания'})
-    readonly description: number;
+    // @ApiProperty({example: '1', description: 'Номер описания'})
+    // readonly description: number;
 }

@@ -1,4 +1,4 @@
-import {Column, DataType, HasOne, Model, Table} from "sequelize-typescript";
+import {BelongsTo, Column, DataType, ForeignKey, HasMany, HasOne, Model, Table} from "sequelize-typescript";
 import {ApiProperty} from "@nestjs/swagger";
 import {Types} from "../types/types.model";
 import {Descriptions} from "./des-prod.model";
@@ -22,12 +22,18 @@ export class Products extends Model<Products, ProductsCreationAttrs>{
     @Column({type: DataType.STRING, allowNull:false})
     name: string;
 
-    @ApiProperty({example: '1', description: 'Номер типа товара, обязательно нафиг'})
-    @HasOne(()=>Types)
-    type_id : Types[];
 
-    @ApiProperty({example: '2', description: 'id описания товара'})
-    @HasOne(() => Descriptions)
-    des_id : Descriptions[];
+    @BelongsTo(()=>Types)
+    types: Types[];
+
+    @ForeignKey(()=>Types)
+    @Column({type: DataType.INTEGER})
+    type_id: number
+
+
+
+    // @ApiProperty({example: '2', description: 'id описания товара'})
+    // @HasOne(() => Descriptions)
+    // des_id : Descriptions[];
 }
 

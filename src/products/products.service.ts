@@ -3,7 +3,6 @@ import {Products} from "./products.model";
 import {InjectModel} from "@nestjs/sequelize";
 import {CreateProductDto} from "./dto/create-product.dto";
 import {Descriptions} from "./des-prod.model";
-import {ReqProductDto} from "./dto/req-product.dto";
 
 @Injectable()
 export class ProductsService {
@@ -21,9 +20,9 @@ export class ProductsService {
         return prods;
     }
 
-    private async addDescription(dto: ReqProductDto){
-        const des = await this.descriptionsRepository.create(dto.description)
-        return des.id
-    }
+    // private async addDescription(dto: CreateProductDto){
+    //     const des = await this.descriptionsRepository.create(dto.description)
+    //     return des.id
+    // }
 
 }
