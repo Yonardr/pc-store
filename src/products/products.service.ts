@@ -10,8 +10,13 @@ export class ProductsService {
                 @InjectModel(Descriptions) private descriptionsRepository: typeof Descriptions,) {}
 
     async createProduct(dto: CreateProductDto){
-
-        const prod = await this.productsRepository.create(dto)
+        const des = {value: dto.description}
+        const data = {
+            name: dto.name,
+            type_id: dto.type_id,
+            description_id: await this.descriptionsRepository.create(des).then(i=>i.id)
+        }
+        const prod = await this.productsRepository.create(data)
         return prod;
     }
 
@@ -20,9 +25,5 @@ export class ProductsService {
         return prods;
     }
 
-    // private async addDescription(dto: CreateProductDto){
-    //     const des = await this.descriptionsRepository.create(dto.description)
-    //     return des.id
-    // }
 
 }

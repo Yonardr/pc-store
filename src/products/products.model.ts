@@ -22,7 +22,6 @@ export class Products extends Model<Products, ProductsCreationAttrs>{
     @Column({type: DataType.STRING, allowNull:false})
     name: string;
 
-
     @BelongsTo(()=>Types)
     types: Types[];
 
@@ -30,6 +29,12 @@ export class Products extends Model<Products, ProductsCreationAttrs>{
     @Column({type: DataType.INTEGER})
     type_id: number
 
+    @BelongsTo(()=>Descriptions)
+    description: Descriptions[];
+
+    @ForeignKey(()=>Descriptions)
+    @Column({type: DataType.INTEGER})
+    description_id: number
 
 
     // @ApiProperty({example: '2', description: 'id описания товара'})

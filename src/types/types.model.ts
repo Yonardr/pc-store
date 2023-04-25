@@ -6,7 +6,7 @@ interface TypesCreationAttrs{
     name: string;
 }
 
-@Table({tableName: 'type'})
+@Table({tableName: 'type', updatedAt:false, createdAt:false})
 export class Types extends Model<Types, TypesCreationAttrs>{
 
     @ApiProperty({example: '1', description: 'Уникальный идентификатор'})
