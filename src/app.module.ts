@@ -13,6 +13,7 @@ import {Products} from "./products/products.model";
 import {Types} from "./types/types.model";
 import {Descriptions} from "./products/des-prod.model";
 import { CharacteristicsModule } from './characteristics/characteristics.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
     controllers: [],
@@ -37,6 +38,7 @@ import { CharacteristicsModule } from './characteristics/characteristics.module'
         ProductsModule,
         TypesModule,
         CharacteristicsModule,
+        OrdersModule,
     ]
 })
 export class AppModule{

@@ -1,7 +1,9 @@
-import {BelongsTo, Column, DataType, ForeignKey, Model, Table} from "sequelize-typescript";
+import {BelongsTo, BelongsToMany, Column, DataType, ForeignKey, Model, Table} from "sequelize-typescript";
 import {ApiProperty} from "@nestjs/swagger";
 import {Types} from "../types/types.model";
 import {Descriptions} from "./des-prod.model";
+import {Orders} from "../orders/orders.model";
+import {ProductOrder} from "../orders/product-order.model";
 
 
 
@@ -36,9 +38,7 @@ export class Products extends Model<Products, ProductsCreationAttrs>{
     @Column({type: DataType.INTEGER})
     description_id: number
 
-
-    // @ApiProperty({example: '2', description: 'id описания товара'})
-    // @HasOne(() => Descriptions)
-    // des_id : Descriptions[];
+    @BelongsToMany(()=> Orders, ()=> ProductOrder)
+    orders: Orders[];
 }
 
