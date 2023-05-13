@@ -14,6 +14,8 @@ import {Types} from "./types/types.model";
 import {Descriptions} from "./products/des-prod.model";
 import { CharacteristicsModule } from './characteristics/characteristics.module';
 import { OrdersModule } from './orders/orders.module';
+import {ProductOrder} from "./orders/product-order.model";
+import {Orders} from "./orders/orders.model";
 
 @Module({
     controllers: [],
@@ -29,7 +31,7 @@ import { OrdersModule } from './orders/orders.module';
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRES_PASSWORD,
             database: process.env.POSTGRES_DB,
-            models: [User, Role, UserRoles, Products, Types, Descriptions],
+            models: [User, Role, UserRoles, Products, Types, Descriptions, Orders, ProductOrder],
             autoLoadModels:true
         }),
         UsersModule,
