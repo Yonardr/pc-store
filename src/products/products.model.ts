@@ -2,15 +2,15 @@ import {BelongsTo, BelongsToMany, Column, DataType, ForeignKey, Model, Table} fr
 import {ApiProperty} from "@nestjs/swagger";
 import {Types} from "../types/types.model";
 import {Descriptions} from "./des-prod.model";
-import {Orders} from "../orders/orders.model";
-import {ProductOrder} from "../orders/product-order.model";
-
+import {Characteristics} from "../characteristics/characteristics.model";
+import {ProductsCharacteristics} from "../characteristics/products-characteristics.model";
 
 
 interface ProductsCreationAttrs{
     name: string;
     type_id: number;
     des_id: number;
+    quantity: number;
 }
 
 @Table({tableName: 'products'})
@@ -38,7 +38,11 @@ export class Products extends Model<Products, ProductsCreationAttrs>{
     @Column({type: DataType.INTEGER})
     description_id: number
 
-    @BelongsToMany(()=> Orders, ()=> ProductOrder)
-    orders: Orders[];
+    @ApiProperty({example: '31', description: 'кол-во товаров в наличии'})
+    @Column({type: DataType.INTEGER})
+    quantity: number;
+
+    @BelongsToMany(()=> Characteristics, ()=> ProductsCharacteristics)
+    characteristics: Characteristics[];
 }
 

@@ -7,15 +7,18 @@ import {Products} from "./products.model";
 import {Descriptions} from "./des-prod.model";
 import {ProductsCharacteristics} from "../characteristics/products-characteristics.model";
 import {Characteristics} from "../characteristics/characteristics.model";
-import {Orders} from "../orders/orders.model";
-import {ProductOrder} from "../orders/product-order.model";
+import {RolesModule} from "../roles/roles.module";
+import {AuthModule} from "../auth/auth.module";
+
 
 
 @Module({
   controllers: [ProductsController],
   providers: [ProductsService],
   imports: [
-      SequelizeModule.forFeature([Products,Types, Descriptions, ProductsCharacteristics, Characteristics, Orders, ProductOrder],),
+      SequelizeModule.forFeature([Products,Types, Descriptions, ProductsCharacteristics, Characteristics,],),
+      RolesModule,
+      forwardRef(()=>AuthModule)
   ]
 })
 export class ProductsModule {}

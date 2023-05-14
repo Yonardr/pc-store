@@ -7,4 +7,7 @@ export class CreateProductDto{
     readonly type_id: number;
     @ApiProperty({example: 'Текст Текст Текст', description: 'Описание в виде текста'})
     readonly description: string;
+    @ApiProperty({example: '33', description: 'Кол-во товаров'})
+    readonly quantity: number;
+    
 }

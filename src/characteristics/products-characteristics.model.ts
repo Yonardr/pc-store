@@ -16,6 +16,4 @@ export class ProductsCharacteristics extends Model<ProductsCharacteristics>{
     @Column({type: DataType.INTEGER})
     characteristics_id: number;
 
-    @Column({type : DataType.STRING, allowNull: false})
-    value: string;
 }

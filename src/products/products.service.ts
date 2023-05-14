@@ -14,7 +14,8 @@ export class ProductsService {
         const data = {
             name: dto.name,
             type_id: dto.type_id,
-            description_id: await this.descriptionsRepository.create(des).then(i=>i.id)
+            description_id: await this.descriptionsRepository.create(des).then(i=>i.id),
+            quantity: dto.quantity,
         }
         const prod = await this.productsRepository.create(data)
         return prod;
@@ -23,6 +24,11 @@ export class ProductsService {
     async getAll(){
         const prods = await this.productsRepository.findAll({include: {all:true}});
         return prods;
+    }
+
+    async getItemsTypeId(id: string){
+        const items = await this.productsRepository.findAll({where: {type_id: id}})
+        return items;
     }
 
 

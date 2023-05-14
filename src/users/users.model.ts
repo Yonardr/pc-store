@@ -2,6 +2,8 @@ import {BelongsToMany, Column, DataType, Model, Table} from "sequelize-typescrip
 import {ApiProperty} from "@nestjs/swagger";
 import {Role} from "../roles/roles.model";
 import {UserRoles} from "../roles/user-roles.model";
+import {Carts} from "../carts/carts.model";
+import {UsersCarts} from "../carts/user-cart.model";
 
 interface UserCreationAttrs{
     login: string;
@@ -25,4 +27,7 @@ export class User extends Model<User, UserCreationAttrs>{
 
     @BelongsToMany(()=> Role, ()=> UserRoles)
     roles : Role[];
+
+    @BelongsToMany(()=> Carts, ()=> UsersCarts)
+    carts: Carts[];
 }
