@@ -9,6 +9,7 @@ import {ProductsCharacteristics} from "../characteristics/products-characteristi
 import {Characteristics} from "../characteristics/characteristics.model";
 import {RolesModule} from "../roles/roles.module";
 import {AuthModule} from "../auth/auth.module";
+import {FileModule} from "../file/file.module";
 
 
 
@@ -18,7 +19,8 @@ import {AuthModule} from "../auth/auth.module";
   imports: [
       SequelizeModule.forFeature([Products,Types, Descriptions, ProductsCharacteristics, Characteristics,],),
       RolesModule,
-      forwardRef(()=>AuthModule)
+      forwardRef(()=>AuthModule),
+      FileModule
   ]
 })
 export class ProductsModule {}

@@ -18,6 +18,9 @@ import {ProductsCharacteristics} from "./characteristics/products-characteristic
 import { CartsModule } from './carts/carts.module';
 import {Carts} from "./carts/carts.model";
 import {UsersCarts} from "./carts/user-cart.model";
+import { FileModule } from './file/file.module';
+import {ServeStaticModule} from "@nestjs/serve-static";
+import * as path from "path";
 
 
 @Module({
@@ -26,6 +29,9 @@ import {UsersCarts} from "./carts/user-cart.model";
     imports:[
         ConfigModule.forRoot({
             envFilePath : `.${process.env.NODE_ENV}.env`
+        }),
+        ServeStaticModule.forRoot({
+            rootPath: path.resolve( __dirname, 'static'),
         }),
         SequelizeModule.forRoot({
             dialect: 'postgres',
@@ -44,6 +50,7 @@ import {UsersCarts} from "./carts/user-cart.model";
         TypesModule,
         CharacteristicsModule,
         CartsModule,
+        FileModule,
 
     ]
 })

@@ -11,6 +11,7 @@ interface ProductsCreationAttrs{
     type_id: number;
     des_id: number;
     quantity: number;
+    image: string;
 }
 
 @Table({tableName: 'products'})
@@ -41,6 +42,10 @@ export class Products extends Model<Products, ProductsCreationAttrs>{
     @ApiProperty({example: '31', description: 'кол-во товаров в наличии'})
     @Column({type: DataType.INTEGER})
     quantity: number;
+
+    @ApiProperty({example: '4nf0sapqo.jpg', description: 'Ссылка на картинку'})
+    @Column({type: DataType.STRING})
+    image: string;
 
     @BelongsToMany(()=> Characteristics, ()=> ProductsCharacteristics)
     characteristics: Characteristics[];
