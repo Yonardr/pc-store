@@ -8,15 +8,20 @@ import {Carts} from "./carts.model";
 import {RolesModule} from "../roles/roles.module";
 import {AuthModule} from "../auth/auth.module";
 import {UsersModule} from "../users/users.module";
+import {Orders} from "../orders/orders.model";
+import {CartOrder} from "../orders/cart-order.model";
 
 @Module({
   controllers: [CartsController],
   providers: [CartsService],
   imports:[
-    SequelizeModule.forFeature([User, UsersCarts, Carts]),
+    SequelizeModule.forFeature([User, UsersCarts, Carts, Orders, CartOrder]),
     RolesModule,
       UsersModule,
     forwardRef(()=>AuthModule)
+  ],
+  exports: [
+      CartsService
   ]
 })
 export class CartsModule {}

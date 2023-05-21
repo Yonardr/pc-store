@@ -43,6 +43,11 @@ export class Products extends Model<Products, ProductsCreationAttrs>{
     @Column({type: DataType.INTEGER})
     quantity: number;
 
+    @ApiProperty({example: '5431', description: 'Цена товара'})
+    @Column({type: DataType.INTEGER})
+    price: number;
+
+
     @ApiProperty({example: '4nf0sapqo.jpg', description: 'Ссылка на картинку'})
     @Column({type: DataType.STRING})
     image: string;

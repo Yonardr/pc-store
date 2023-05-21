@@ -38,4 +38,19 @@ export class ProductsService {
     }
 
 
+    async getItemsId(id: number) {
+        const item = await this.productsRepository.findOne({where: {id: id}})
+        return item;
+    }
+
+    async buyProd(id: number, quantity: number){
+        const prod = await this.productsRepository.findOne({where: {id: id}})
+        const newQuantity = prod.quantity - quantity;
+        if(newQuantity >= 0){
+            const res = await this.productsRepository.update({quantity: newQuantity}, {where: {id: id}})
+            return "success"
+        }
+
+        return "error";
+    }
 }

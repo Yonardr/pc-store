@@ -5,6 +5,7 @@ import {RolesGuard} from "../auth/roles.guard";
 import {CreateCartDto} from "./dto/create-cart.dto";
 import {ApiTags} from "@nestjs/swagger";
 import {CartGetDto} from "../characteristics/dto/cart-get.dto";
+import {GetCartDto} from "./dto/get-cart.dto";
 
 @ApiTags("Корзина для данка, damnnnnnnnn")
 @Controller('carts')
@@ -17,10 +18,10 @@ export class CartsController {
         return this.cartService.createCart(dto)
     }
 
-    @Roles("user", "admin")
-    @UseGuards(RolesGuard)
+    //@Roles("user", "admin")
+    //@UseGuards(RolesGuard)
     @Get()
-    get(@Body() dto: CartGetDto){
+    get(@Body() dto: GetCartDto){
         return this.cartService.getCart(dto);
     }
 }

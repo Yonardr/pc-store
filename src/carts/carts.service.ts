@@ -6,6 +6,7 @@ import {UsersCarts} from "./user-cart.model";
 import {CreateCartDto} from "./dto/create-cart.dto";
 import {CartGetDto} from "../characteristics/dto/cart-get.dto";
 import {Model} from "sequelize-typescript";
+import {GetCartDto} from "./dto/get-cart.dto";
 
 @Injectable()
 export class CartsService {
@@ -30,19 +31,30 @@ export class CartsService {
         }
     }
 
-    async getCart(dto: CartGetDto){
+    async getCart(dto: GetCartDto){
         try {
-            //const IdUser = await this.userService.getUserByLogin(dto.login).then(i => i.id);
+            const IdUser = await this.userService.getUserByLogin(dto.user_login).then(i => i.id);
 
-            //const allCartId = await this.userCartsRepository.findAll({where: {user_id: IdUser}})
-            //allCartId.forEach((item)=> item.cart_id)
-            //const viewCart = await this.cartsRepository.findAll({include: [{model: UsersCarts, where: {user_id: 1}}]}).then(i=>i)
-            //return viewCart;
+            const allCartId = await this.userCartsRepository.findAll({where: {user_id: IdUser}}).then(i=> i)
+            let arr = []
+            for (const item of allCartId) {
+                arr.push(await this.cartsRepository.findAll({where: {id: item.cart_id}}))
+            }
+
+            return arr;
         }
         catch {
             throw new UnauthorizedException({message: "Что то пошло не так или корзина пустая("})
         }
     }
 
+    async getUserOfCartId(id: number) {
+        const user_id = await this.userCartsRepository.findOne({where: {cart_id: id}}).then(i => i.user_id)
+        return user_id;
+    }
 
+    async getCartById(id: number){
+        const res = await this.cartsRepository.findOne({where: {id: id}})
+        return res;
+    }
 }

@@ -21,6 +21,9 @@ import {FileModule} from "../file/file.module";
       RolesModule,
       forwardRef(()=>AuthModule),
       FileModule
-  ]
+  ],
+    exports: [
+        ProductsService
+    ]
 })
 export class ProductsModule {}
