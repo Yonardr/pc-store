@@ -53,4 +53,9 @@ export class ProductsService {
 
         return "error";
     }
+
+    async editQuantity(id: number, quantity: number){
+        const res = await this.productsRepository.update({quantity: quantity}, {where: {id: id}})
+        return res;
+    }
 }

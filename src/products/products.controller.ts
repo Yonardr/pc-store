@@ -1,10 +1,11 @@
-import {Body, Controller, Get, Param, Post, UploadedFile, UseGuards, UseInterceptors} from '@nestjs/common';
+import {Body, Controller, Get, Param, Patch, Post, UploadedFile, UseGuards, UseInterceptors} from '@nestjs/common';
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {ProductsService} from "./products.service";
 import {CreateProductDto} from "./dto/create-product.dto";
 import {Roles} from "../auth/roles-auth.decorator";
 import {RolesGuard} from "../auth/roles.guard";
 import {FileInterceptor} from "@nestjs/platform-express";
+import {EditProdDto} from "./dto/edit-prod.dto";
 
 @ApiTags('Товары')
 @Controller('products')
@@ -39,5 +40,11 @@ export class ProductsController {
     @Get('/id/:value')
     getItemsId(@Param('value') id: number) {
         return this.productsService.getItemsId(id);
+    }
+
+    @ApiOperation({summary: 'Редактирование кол-во товара по id'})
+    @Patch()
+    editQuantity(@Body() dto: EditProdDto) {
+        return this.productsService.editQuantity(dto.id, dto.quantity);
     }
 }

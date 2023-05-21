@@ -7,12 +7,14 @@ import {CreateCartDto} from "./dto/create-cart.dto";
 import {CartGetDto} from "../characteristics/dto/cart-get.dto";
 import {Model} from "sequelize-typescript";
 import {GetCartDto} from "./dto/get-cart.dto";
+import {CartOrder} from "../orders/cart-order.model";
 
 @Injectable()
 export class CartsService {
 
     constructor(@InjectModel(Carts) private cartsRepository : typeof Carts,
                 @InjectModel(UsersCarts) private userCartsRepository: typeof UsersCarts,
+                @InjectModel(CartOrder) private cartOrderRepository: typeof CartOrder,
                 private userService: UsersService) {}
 
 
@@ -38,10 +40,17 @@ export class CartsService {
             const allCartId = await this.userCartsRepository.findAll({where: {user_id: IdUser}}).then(i=> i)
             let arr = []
             for (const item of allCartId) {
-                arr.push(await this.cartsRepository.findAll({where: {id: item.cart_id}}))
+                const a = await this.cartOrderRepository.findAll({where: {cart_id: item.cart_id}})
+                if(a.length === 0) arr.push(item.cart_id)
+                //
+            }
+            const res = []
+            for (const item of arr){
+                res.push(await this.cartsRepository.findAll({where: {id: item}}))
             }
 
-            return arr;
+
+            return res;
         }
         catch {
             throw new UnauthorizedException({message: "Что то пошло не так или корзина пустая("})
