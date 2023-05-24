@@ -9,5 +9,7 @@ export class CreateProductDto{
     readonly description: string;
     @ApiProperty({example: '33', description: 'Кол-во товаров'})
     readonly quantity: number;
+    @ApiProperty({example: '33', description: 'Цена товаров'})
+    readonly price: number;
     
 }

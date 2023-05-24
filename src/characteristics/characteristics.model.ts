@@ -11,7 +11,7 @@ export class Characteristics extends Model<Characteristics>{
     id: number;
 
     @ApiProperty({example: 'Сокет', description: 'Название поля в характеристиках'})
-    @Column({type: DataType.STRING, unique:true, allowNull:false})
+    @Column({type: DataType.STRING, allowNull:false})
     name: string;
 
     @ApiProperty({example: '1200', description: 'String значение характеристики'})

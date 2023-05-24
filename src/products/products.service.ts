@@ -39,7 +39,7 @@ export class ProductsService {
 
 
     async getItemsId(id: number) {
-        const item = await this.productsRepository.findOne({where: {id: id}})
+        const item = await this.productsRepository.findOne({where: {id: id}, include: {all:true}})
         return item;
     }
 
