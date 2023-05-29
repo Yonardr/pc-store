@@ -60,4 +60,9 @@ export class ProductsService {
         const res = await this.productsRepository.update({name: dto.name, type_id: dto.type_id, quantity: dto.quantity, image: fileName, description_id: await this.descriptionsRepository.create(dto.description).then(i=>i.id)}, {where: {id: dto.id}})
         return res;
     }
+
+    async deleteProduct(id : number){
+        const res = await this.productsRepository.destroy({where: {id : id}})
+        return res;
+    }
 }

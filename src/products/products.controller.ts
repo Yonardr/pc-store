@@ -1,4 +1,15 @@
-import {Body, Controller, Get, Param, Patch, Post, UploadedFile, UseGuards, UseInterceptors} from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Param,
+    Patch,
+    Post,
+    UploadedFile,
+    UseGuards,
+    UseInterceptors
+} from '@nestjs/common';
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {ProductsService} from "./products.service";
 import {CreateProductDto} from "./dto/create-product.dto";
@@ -42,4 +53,9 @@ export class ProductsController {
         return this.productsService.getItemsId(id);
     }
 
+    @ApiOperation({summary: 'Удаление товара по id'})
+    @Delete('/id/:value')
+    deleteItem(@Param('value') id: number) {
+        return this.productsService.deleteProduct(id);
+    }
 }
