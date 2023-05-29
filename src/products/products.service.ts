@@ -22,6 +22,7 @@ export class ProductsService {
             description_id: await this.descriptionsRepository.create(des).then(i=>i.id),
             quantity: dto.quantity,
             image: fileName,
+            price: dto.price
         }
         const prod = await this.productsRepository.create(data)
         return prod;
@@ -57,7 +58,7 @@ export class ProductsService {
     async editQuantity(dto, image: any){
         const fileName = await this.fileService.createFile(image)
 
-        const res = await this.productsRepository.update({name: dto.name, type_id: dto.type_id, quantity: dto.quantity, image: fileName, description_id: await this.descriptionsRepository.create(dto.description).then(i=>i.id)}, {where: {id: dto.id}})
+        const res = await this.productsRepository.update({name: dto.name, type_id: dto.type_id, quantity: dto.quantity, image: fileName, description_id: await this.descriptionsRepository.create(dto.description).then(i=>i.id), price: dto.price}, {where: {id: dto.id}})
         return res;
     }
 
