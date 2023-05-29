@@ -66,4 +66,10 @@ export class CartsService {
         const res = await this.cartsRepository.findOne({where: {id: id}})
         return res;
     }
+    async deleteCartById(id: number){
+        await this.userCartsRepository.destroy({where: {cart_id: id}})
+        await this.cartOrderRepository.destroy({where: {cart_id: id}})
+        const res = await this.cartsRepository.destroy({where: {id: id}})
+        return res;
+    }
 }

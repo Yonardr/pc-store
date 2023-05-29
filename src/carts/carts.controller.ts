@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Param, Post, UseGuards} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, UseGuards} from '@nestjs/common';
 import {CartsService} from "./carts.service";
 import {Roles} from "../auth/roles-auth.decorator";
 import {RolesGuard} from "../auth/roles.guard";
@@ -23,5 +23,10 @@ export class CartsController {
     @Get('/:value')
     get(@Param('value') value: string){
         return this.cartService.getCart(value);
+    }
+
+    @Delete('/id/:value')
+    delete(@Param('value') value: number){
+        return this.cartService.deleteCartById(value);
     }
 }
