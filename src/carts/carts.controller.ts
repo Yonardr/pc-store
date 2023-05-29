@@ -20,8 +20,8 @@ export class CartsController {
 
     //@Roles("user", "admin")
     //@UseGuards(RolesGuard)
-    @Get()
-    get(@Body() dto: GetCartDto){
-        return this.cartService.getCart(dto);
+    @Get('/:value')
+    get(@Param('value') value: string){
+        return this.cartService.getCart(value);
     }
 }

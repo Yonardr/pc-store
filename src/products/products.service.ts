@@ -54,8 +54,10 @@ export class ProductsService {
         return "error";
     }
 
-    async editQuantity(id: number, quantity: number){
-        const res = await this.productsRepository.update({quantity: quantity}, {where: {id: id}})
+    async editQuantity(dto, image: any){
+        const fileName = await this.fileService.createFile(image)
+
+        const res = await this.productsRepository.update({name: dto.name, type_id: dto.type_id, quantity: dto.quantity, image: fileName, description_id: await this.descriptionsRepository.create(dto.description).then(i=>i.id)}, {where: {id: dto.id}})
         return res;
     }
 }

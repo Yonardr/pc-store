@@ -33,9 +33,9 @@ export class CartsService {
         }
     }
 
-    async getCart(dto: GetCartDto){
+    async getCart(dto: string){
         try {
-            const IdUser = await this.userService.getUserByLogin(dto.user_login).then(i => i.id);
+            const IdUser = await this.userService.getUserByLogin(dto).then(i => i.id);
 
             const allCartId = await this.userCartsRepository.findAll({where: {user_id: IdUser}}).then(i=> i)
             let arr = []

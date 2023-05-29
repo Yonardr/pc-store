@@ -42,9 +42,4 @@ export class ProductsController {
         return this.productsService.getItemsId(id);
     }
 
-    @ApiOperation({summary: 'Редактирование кол-во товара по id'})
-    @Patch()
-    editQuantity(@Body() dto: EditProdDto) {
-        return this.productsService.editQuantity(dto.id, dto.quantity);
-    }
 }

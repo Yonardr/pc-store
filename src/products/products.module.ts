@@ -10,11 +10,12 @@ import {Characteristics} from "../characteristics/characteristics.model";
 import {RolesModule} from "../roles/roles.module";
 import {AuthModule} from "../auth/auth.module";
 import {FileModule} from "../file/file.module";
+import {EditProductController} from "./edit-product.controller";
 
 
 
 @Module({
-  controllers: [ProductsController],
+  controllers: [ProductsController, EditProductController],
   providers: [ProductsService],
   imports: [
       SequelizeModule.forFeature([Products,Types, Descriptions, ProductsCharacteristics, Characteristics,],),
