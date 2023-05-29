@@ -56,10 +56,21 @@ export class ProductsService {
     }
 
     async editQuantity(dto, image: any){
+        if(image){
         const fileName = await this.fileService.createFile(image)
-
         const res = await this.productsRepository.update({name: dto.name, type_id: dto.type_id, quantity: dto.quantity, image: fileName, description_id: await this.descriptionsRepository.create(dto.description).then(i=>i.id), price: dto.price}, {where: {id: dto.id}})
-        return res;
+            return res;
+            }
+        else{
+            const res = await this.productsRepository.update({name: dto.name,
+                type_id: dto.type_id,
+                quantity: dto.quantity,
+                description_id: await this.descriptionsRepository.create(dto.description).then(i=>i.id),
+                price: dto.price},
+                {where: {id: dto.id}})
+            return res;
+        }
+
     }
 
     async deleteProduct(id : number){
