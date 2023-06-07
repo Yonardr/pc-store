@@ -1,4 +1,4 @@
-import {Body, Controller, Get, ParseArrayPipe, Post, Query} from '@nestjs/common';
+import {Body, Controller, Get, Param, ParseArrayPipe, Post, Query} from '@nestjs/common';
 import {OrdersService} from "./orders.service";
 import {CreateOrderDto} from "./dto/create-order.dto";
 import {GetOrdersDto} from "./dto/get-orders.dto";
@@ -14,13 +14,13 @@ export class OrdersController {
         return this.orderService.create(dto);
     }
 
-    @Get()
-    get(@Body() dto : GetOrdersDto){
-        return this.orderService.getAll(dto);
+    @Get('/:login')
+    get(@Param('login') value: string){
+        return this.orderService.getAll(value);
     }
 
-    @Get('/id')
-    getDataOrderById(@Body() dto: GetDataOrderDto){
-        return this.orderService.getCartOfOrderId(dto.id);
+    @Get('/:id')
+    getDataOrderById(@Param('id') value: number){
+        return this.orderService.getCartOfOrderId(value);
     }
 }

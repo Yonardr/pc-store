@@ -41,8 +41,8 @@ export class OrdersService {
         return order;
     }
 
-    async getAll(dto: GetOrdersDto){
-        const userId = await this.userService.getUserByLogin(dto.user_login).then(i=>i.id)
+    async getAll(user_login: string){
+        const userId = await this.userService.getUserByLogin(user_login).then(i=>i.id)
         const allOrder = await this.userOrderRepository.findAll({where: {user_id: userId}})
         const arr = []
         for(const item of allOrder){
